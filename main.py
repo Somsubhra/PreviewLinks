@@ -1,5 +1,8 @@
 # python imports
 import os
+import json
+import urllib2
+import urlparse
 
 # import frameworks
 import webapp2
@@ -19,6 +22,55 @@ class IndexHandler(webapp2.RequestHandler):
         template = JINJA_ENVIRONMENT.get_template('index.html')
         self.response.write(template.render())
 
+
+class APIHandler(webapp2.RequestHandler):
+    def get(self):
+
+        self.response.headers['Content-Type'] = 'text/json'
+
+        link = self.request.get("link")
+
+        url_components = urlparse.urlparse(link)
+
+        # If no scheme associated with URL, assume http
+        if url_components.scheme == '':
+            link = "http://" + link
+
+        request = urllib2.Request(link)
+
+        err = False
+        err_msg = ""
+
+        try:
+            response = urllib2.urlopen(request)
+        except urllib2.HTTPError, e:
+            err = True
+            err_msg += "HTTP Error: " + str(e.code)
+        except urllib2.URLError, e:
+            err = True
+            err_msg += "URL Error: " + str(e.reason)
+        except Exception:
+            import traceback
+            err = True
+            err_msg += "Ran into an exception: Traceback - " + traceback.format_exc()
+
+        if err:
+            result = {
+                'success': False,
+                'message': err_msg
+            }
+
+        else:
+            html = response.read()
+            result = {
+                'success': True,
+                'html': html
+            }
+
+        self.response.write(json.dumps(result))
+
+
 app = webapp2.WSGIApplication([
-    ('/', IndexHandler)
+    ('/', IndexHandler),
+    ('/api', APIHandler)
 ], debug=True)
