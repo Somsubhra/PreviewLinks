@@ -75,7 +75,7 @@ class APIHandler(webapp2.RequestHandler):
             # Get the description of the web page
             description = []
 
-            description_tag = soup.findAll(attrs={"name": "description"})
+            description_tag = soup.find_all(attrs={"name": "description"})
 
             if len(description_tag) > 0:
                 for i in range(len(description_tag)):
@@ -84,7 +84,7 @@ class APIHandler(webapp2.RequestHandler):
             # Get the keywords of the web page
             keywords = []
 
-            keywords_tag = soup.findAll(attrs={"name": "keywords"})
+            keywords_tag = soup.find_all(attrs={"name": "keywords"})
 
             if len(keywords_tag) > 0:
                 for i in range(len(keywords_tag)):
@@ -100,33 +100,33 @@ class APIHandler(webapp2.RequestHandler):
             thumbnail_urls = []
 
             # Search for any open graph image
-            og_image_tag = soup.findAll(attrs={"property": "og:image"})
+            og_image_tag = soup.find_all(attrs={"property": "og:image"})
 
             if len(og_image_tag) > 0:
                 for i in range(len(og_image_tag)):
                     thumbnail_urls.append(og_image_tag[i].get("content"))
 
-            og_image_tag = soup.findAll(attrs={"name": "og:image"})
+            og_image_tag = soup.find_all(attrs={"name": "og:image"})
 
             if len(og_image_tag) > 0:
                 for i in range(len(og_image_tag)):
                     thumbnail_urls.append(og_image_tag[i].get("content"))
 
             # Search for link rel=img_src or image_src
-            link_image_tag = soup.findAll(attrs={"rel": "img_src"})
+            link_image_tag = soup.find_all(attrs={"rel": "img_src"})
 
             if len(link_image_tag) > 0:
                 for i in range(len(link_image_tag)):
                     thumbnail_urls.append(link_image_tag[i].get("href"))
 
-            link_image_tag = soup.findAll(attrs={"rel": "image_src"})
+            link_image_tag = soup.find_all(attrs={"rel": "image_src"})
 
             if len(link_image_tag) > 0:
                 for i in range(len(link_image_tag)):
                     thumbnail_urls.append(link_image_tag[i].get("href"))
 
             # Search for itemprop=image
-            itemprop_image_tag = soup.findAll(attrs={"itemprop": "image"})
+            itemprop_image_tag = soup.find_all(attrs={"itemprop": "image"})
 
             if len(itemprop_image_tag) > 0:
                 for i in range(len(itemprop_image_tag)):
