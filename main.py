@@ -73,6 +73,8 @@ class APIHandler(webapp2.RequestHandler):
             soup = BeautifulSoup(html.decode('utf-8'))
 
             # Get the description of the web page
+
+            # Description from meta tag
             description = []
 
             description_tag = soup.find_all(attrs={"name": "description"})
@@ -80,6 +82,19 @@ class APIHandler(webapp2.RequestHandler):
             if len(description_tag) > 0:
                 for i in range(len(description_tag)):
                     description.append(description_tag[i].get('content'))
+
+            # Description from open graph tag
+            og_description_tag = soup.find_all(attrs={"name": "og:description"})
+
+            if len(og_description_tag) > 0:
+                for i in range(len(og_description_tag)):
+                    description.append(og_description_tag[i].get('content'))
+
+            og_description_tag = soup.find_all(attrs={"property": "og:description"})
+
+            if len(og_description_tag) > 0:
+                for i in range(len(og_description_tag)):
+                    description.append(og_description_tag[i].get('content'))
 
             # Get the keywords of the web page
             keywords = []
@@ -91,10 +106,25 @@ class APIHandler(webapp2.RequestHandler):
                     keywords.append(keywords_tag[i].get('content'))
 
             # Get the title of the web page
+
+            # Get the normal title tag text
             title = []
 
             if soup.title:
                 title.append(soup.title.string)
+
+            # Get the open graph title
+            title_tag = soup.find_all(attrs={"name": "og:title"})
+
+            if len(title_tag) > 0:
+                for i in range(len(title_tag)):
+                    title.append(title_tag[i].get('content'))
+
+            title_tag = soup.find_all(attrs={"property": "og:title"})
+
+            if len(title_tag) > 0:
+                for i in range(len(title_tag)):
+                    title.append(title_tag[i].get('content'))
 
             # Get the thumbnail image URL
             thumbnail_urls = []
