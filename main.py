@@ -69,9 +69,26 @@ class APIHandler(webapp2.RequestHandler):
 
         else:
             html = response.read()
+
+            soup = BeautifulSoup(html.decode('utf-8'))
+            description_tag = soup.findAll(attrs={"name": "description"})
+            keywords_tag = soup.findAll(attrs={"name": "keywords"})
+
+            if len(description_tag) > 0:
+                description = str(description_tag[0].get('content'))
+            else:
+                description = ''
+
+            if len(keywords_tag) > 0:
+                keywords = str(keywords_tag[0].get('content'))
+            else:
+                keywords = ''
+
             result = {
                 'success': True,
-                'html': html
+                'title': soup.title.string,
+                'description': description,
+                'keywords': keywords
             }
 
         self.response.write(json.dumps(result))
