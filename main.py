@@ -71,29 +71,53 @@ class APIHandler(webapp2.RequestHandler):
             html = response.read()
 
             soup = BeautifulSoup(html.decode('utf-8'))
+
+            # Get the description of the web page
+            description = []
+
             description_tag = soup.findAll(attrs={"name": "description"})
-            keywords_tag = soup.findAll(attrs={"name": "keywords"})
 
             if len(description_tag) > 0:
-                description = description_tag[0].get('content')
-            else:
-                description = ''
+                for i in range(len(description_tag)):
+                    description.append(description_tag[i].get('content'))
+
+            # Get the keywords of the web page
+            keywords = []
+
+            keywords_tag = soup.findAll(attrs={"name": "keywords"})
 
             if len(keywords_tag) > 0:
-                keywords = keywords_tag[0].get('content')
-            else:
-                keywords = ''
+                for i in range(len(keywords_tag)):
+                    keywords.append(keywords_tag[i].get('content'))
+
+            # Get the title of the web page
+            title = []
 
             if soup.title:
-                title = soup.title.string
-            else:
-                title = ''
+                title.append(soup.title.string)
+
+            # Get the thumbnail image URL
+            thumbnail_urls = []
+
+            # Search for any open graph image
+            og_image_tag = soup.findAll(attrs={"property": "og:image"})
+
+            if len(og_image_tag) > 0:
+                for i in range(len(og_image_tag)):
+                    thumbnail_urls.append(og_image_tag[i].get("content"))
+
+            og_image_tag = soup.findAll(attrs={"name": "og:image"})
+
+            if len(og_image_tag) > 0:
+                for i in range(len(og_image_tag)):
+                    thumbnail_urls.append(og_image_tag[i].get("content"))
 
             result = {
                 'success': True,
                 'title': title,
                 'description': description,
-                'keywords': keywords
+                'keywords': keywords,
+                'thumbnails': thumbnail_urls
             }
 
         self.response.write(json.dumps(result))
