@@ -112,6 +112,26 @@ class APIHandler(webapp2.RequestHandler):
                 for i in range(len(og_image_tag)):
                     thumbnail_urls.append(og_image_tag[i].get("content"))
 
+            # Search for link rel=img_src or image_src
+            link_image_tag = soup.findAll(attrs={"rel": "img_src"})
+
+            if len(link_image_tag) > 0:
+                for i in range(len(link_image_tag)):
+                    thumbnail_urls.append(link_image_tag[i].get("href"))
+
+            link_image_tag = soup.findAll(attrs={"rel": "image_src"})
+
+            if len(link_image_tag) > 0:
+                for i in range(len(link_image_tag)):
+                    thumbnail_urls.append(link_image_tag[i].get("href"))
+
+            # Search for itemprop=image
+            itemprop_image_tag = soup.findAll(attrs={"itemprop": "image"})
+
+            if len(itemprop_image_tag) > 0:
+                for i in range(len(itemprop_image_tag)):
+                    thumbnail_urls.append(itemprop_image_tag[i].get("content"))
+
             result = {
                 'success': True,
                 'title': title,
