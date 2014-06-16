@@ -4,6 +4,13 @@ import json
 import urllib2
 import urlparse
 
+# Setup third party libraries
+import sys
+sys.path.insert(0, 'third-party')
+
+# import third party libraries
+from bs4 import BeautifulSoup
+
 # import frameworks
 import webapp2
 import jinja2
