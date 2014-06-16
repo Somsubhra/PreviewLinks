@@ -75,12 +75,12 @@ class APIHandler(webapp2.RequestHandler):
             keywords_tag = soup.findAll(attrs={"name": "keywords"})
 
             if len(description_tag) > 0:
-                description = str(description_tag[0].get('content'))
+                description = description_tag[0].get('content')
             else:
                 description = ''
 
             if len(keywords_tag) > 0:
-                keywords = str(keywords_tag[0].get('content'))
+                keywords = keywords_tag[0].get('content')
             else:
                 keywords = ''
 
