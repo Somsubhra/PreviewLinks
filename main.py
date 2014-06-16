@@ -84,9 +84,14 @@ class APIHandler(webapp2.RequestHandler):
             else:
                 keywords = ''
 
+            if soup.title:
+                title = soup.title.string
+            else:
+                title = ''
+
             result = {
                 'success': True,
-                'title': soup.title.string,
+                'title': title,
                 'description': description,
                 'keywords': keywords
             }
