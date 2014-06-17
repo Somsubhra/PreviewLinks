@@ -41,13 +41,16 @@ def get_link_details(link, number_of_results=None, version=None):
             response = urllib2.urlopen(request)
         except urllib2.HTTPError, e:
             err = True
+            response = None
             err_msg += "HTTP Error: " + str(e.code)
         except urllib2.URLError, e:
             err = True
+            response = None
             err_msg += "URL Error: " + str(e.reason)
         except Exception:
             import traceback
             err = True
+            response = None
             err_msg += "Ran into an exception: Traceback - " + traceback.format_exc()
 
         if err:
