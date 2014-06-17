@@ -24,18 +24,7 @@ JINJA_ENVIRONMENT = jinja2.Environment(
 )
 
 
-class IndexHandler(webapp2.RequestHandler):
-    def get(self):
-        template = JINJA_ENVIRONMENT.get_template('index.html')
-        self.response.write(template.render())
-
-
-class APIHandler(webapp2.RequestHandler):
-    def get(self):
-
-        self.response.headers['Content-Type'] = 'text/json'
-
-        link = self.request.get("link")
+def get_link_details(link, number_of_results):
 
         url_components = urlparse.urlparse(link)
 
@@ -151,8 +140,6 @@ class APIHandler(webapp2.RequestHandler):
             for i in range(len(itemprop_image_tag)):
                 thumbnail_urls.append(itemprop_image_tag[i].get("content"))
 
-            number_of_results = self.request.get('results')
-
             if number_of_results == 'multiple':
                 result = {
                     'success': True,
@@ -186,6 +173,25 @@ class APIHandler(webapp2.RequestHandler):
                     'keywords': keywords_result,
                     'thumbnail': thumbnails_result
                 }
+
+        return result
+
+
+class IndexHandler(webapp2.RequestHandler):
+    def get(self):
+        template = JINJA_ENVIRONMENT.get_template('index.html')
+        self.response.write(template.render())
+
+
+class APIHandler(webapp2.RequestHandler):
+    def get(self):
+
+        self.response.headers['Content-Type'] = 'text/json'
+
+        link = self.request.get("link")
+        number_of_results = self.request.get("results")
+
+        result = get_link_details(link, number_of_results)
 
         self.response.write(json.dumps(result))
 
