@@ -146,7 +146,8 @@ def get_link_details(link, number_of_results=None):
                     'title': title,
                     'description': description,
                     'keywords': keywords,
-                    'thumbnails': thumbnail_urls
+                    'thumbnails': thumbnail_urls,
+                    'link': link
                 }
             else:
                 title_result = ''
@@ -171,7 +172,8 @@ def get_link_details(link, number_of_results=None):
                     'title': title_result,
                     'description': description_result,
                     'keywords': keywords_result,
-                    'thumbnail': thumbnails_result
+                    'thumbnail': thumbnails_result,
+                    'link': link
                 }
 
         return result
