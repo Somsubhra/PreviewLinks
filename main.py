@@ -68,27 +68,27 @@ def get_link_details(link, number_of_results=None):
 
             description_tag = soup.find_all(attrs={"name": "description"})
 
-            for i in range(len(description_tag)):
-                description.append(description_tag[i].get('content'))
+            for tag in description_tag:
+                description.append(tag.get('content'))
 
             # Description from open graph tag
             og_description_tag = soup.find_all(attrs={"name": "og:description"})
 
-            for i in range(len(og_description_tag)):
-                description.append(og_description_tag[i].get('content'))
+            for tag in og_description_tag:
+                description.append(tag.get('content'))
 
             og_description_tag = soup.find_all(attrs={"property": "og:description"})
 
-            for i in range(len(og_description_tag)):
-                description.append(og_description_tag[i].get('content'))
+            for tag in og_description_tag:
+                description.append(tag.get('content'))
 
             # Get the keywords of the web page
             keywords = []
 
             keywords_tag = soup.find_all(attrs={"name": "keywords"})
 
-            for i in range(len(keywords_tag)):
-                keywords.append(keywords_tag[i].get('content'))
+            for tag in keywords_tag:
+                keywords.append(tag.get('content'))
 
             # Get the title of the web page
 
@@ -101,13 +101,13 @@ def get_link_details(link, number_of_results=None):
             # Get the open graph title
             title_tag = soup.find_all(attrs={"name": "og:title"})
 
-            for i in range(len(title_tag)):
-                title.append(title_tag[i].get('content'))
+            for tag in title_tag:
+                title.append(tag.get('content'))
 
             title_tag = soup.find_all(attrs={"property": "og:title"})
 
-            for i in range(len(title_tag)):
-                title.append(title_tag[i].get('content'))
+            for tag in title_tag:
+                title.append(tag.get('content'))
 
             # Get the thumbnail image URL
             thumbnail_urls = []
@@ -115,38 +115,38 @@ def get_link_details(link, number_of_results=None):
             # Search for any open graph image
             og_image_tag = soup.find_all(attrs={"property": "og:image"})
 
-            for i in range(len(og_image_tag)):
-                thumbnail_urls.append(og_image_tag[i].get("content"))
+            for tag in og_image_tag:
+                thumbnail_urls.append(tag.get("content"))
 
             og_image_tag = soup.find_all(attrs={"name": "og:image"})
 
-            for i in range(len(og_image_tag)):
-                thumbnail_urls.append(og_image_tag[i].get("content"))
+            for tag in og_image_tag:
+                thumbnail_urls.append(tag.get("content"))
 
             # Search for link rel=img_src or image_src
             link_image_tag = soup.find_all(attrs={"rel": "img_src"})
 
-            for i in range(len(link_image_tag)):
-                thumbnail_urls.append(link_image_tag[i].get("href"))
+            for tag in link_image_tag:
+                thumbnail_urls.append(tag.get("href"))
 
             link_image_tag = soup.find_all(attrs={"rel": "image_src"})
 
-            for i in range(len(link_image_tag)):
-                thumbnail_urls.append(link_image_tag[i].get("href"))
+            for tag in link_image_tag:
+                thumbnail_urls.append(tag.get("href"))
 
             # Search for itemprop=image
             itemprop_image_tag = soup.find_all(attrs={"itemprop": "image"})
 
-            for i in range(len(itemprop_image_tag)):
-                thumbnail_urls.append(itemprop_image_tag[i].get("content"))
+            for tag in itemprop_image_tag:
+                thumbnail_urls.append(tag.get("content"))
 
             # Get the author of webpage
             author = []
 
             author_tag = soup.find_all(attrs={"name": "author"})
 
-            for i in range(len(author_tag)):
-                author.append(author_tag[i].get("content"))
+            for tag in author_tag:
+                author.append(tag.get("content"))
 
             if number_of_results == 'multiple':
                 result = {
