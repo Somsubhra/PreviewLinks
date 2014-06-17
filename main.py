@@ -148,6 +148,214 @@ def get_link_details(link, number_of_results=None, version=None):
             for tag in author_tag:
                 author.append(tag.get("content"))
 
+            # Get the subject of the web page
+            subject = []
+
+            subject_tag = soup.find_all(attrs={"name": "subject"})
+
+            for tag in subject_tag:
+                subject.append(tag.get("content"))
+
+            # Get the copyright of the web page
+            copyright = []
+
+            copyright_tag = soup.find_all(attrs={"name": "copyright"})
+
+            for tag in copyright_tag:
+                copyright.append(tag.get("content"))
+
+            # Get the language of the web page
+            language = []
+
+            language_tag = soup.find_all(attrs={"name": "language"})
+
+            for tag in language_tag:
+                language.append(tag.get("content"))
+
+            # Get the revised time of the web page
+            revised = []
+
+            revised_tag = soup.find_all(attrs={"name": "revised"})
+
+            for tag in revised_tag:
+                revised.append(tag.get("content"))
+
+            # Get the abstract of the web page
+            abstract = []
+
+            abstract_tag = soup.find_all(attrs={"name": "abstract"})
+
+            for tag in abstract_tag:
+                abstract.append(tag.get("content"))
+
+            # Get the topic of the web page
+            topic = []
+
+            topic_tag = soup.find_all(attrs={"name": "topic"})
+
+            for tag in topic_tag:
+                topic.append(tag.get("content"))
+
+            # Get the summary of the web page
+            summary = []
+
+            summary_tag = soup.find_all(attrs={"name": "summary"})
+
+            for tag in summary_tag:
+                summary.append(tag.get("content"))
+
+            # Get the classification of the web page
+            classification = []
+
+            classification_tag = soup.find_all(attrs={"name": "classification"})
+
+            for tag in classification_tag:
+                classification.append(tag.get("content"))
+
+            # Get the designer of the web page
+            designer = []
+
+            designer_tag = soup.find_all(attrs={"name": "designer"})
+
+            for tag in designer_tag:
+                designer.append(tag.get("content"))
+
+            # Get the mail id of the web page
+            mail = []
+
+            mail_tag = soup.find_all(attrs={"name": "reply-to"})
+
+            for tag in mail_tag:
+                mail.append(tag.get("content"))
+
+            # Get the owner of the web page
+            owner = []
+
+            owner_tag = soup.find_all(attrs={"name": "owner"})
+
+            for tag in owner_tag:
+                owner.append(tag.get("content"))
+
+            # Get the url of the web page
+            url = []
+
+            url_tag = soup.find_all(attrs={"name": "url"})
+
+            for tag in url_tag:
+                url.append(tag.get("content"))
+
+            # Get the identifier url of the web page
+            identifier_url = []
+
+            identifier_url_tag = soup.find_all(attrs={"name": "identifier-url"})
+
+            for tag in identifier_url_tag:
+                identifier_url.append(tag)
+
+            # Get the directory of the web page
+            directory = []
+
+            directory_tag = soup.find_all(attrs={"name": "directory"})
+
+            for tag in directory_tag:
+                directory.append(tag.get("content"))
+
+            # Get the page name
+            pagename = []
+
+            pagename_tag = soup.find_all(attrs={"name": "pagename"})
+
+            for tag in pagename_tag:
+                pagename.append(tag.get("content"))
+
+            # Get the category of the web page
+            category = []
+
+            category_tag = soup.find_all(attrs={"name": "category"})
+
+            for tag in category_tag:
+                category.append(tag.get("content"))
+
+            # Get the coverage of the web page
+            coverage = []
+
+            coverage_tag = soup.find_all(attrs={"name": "coverage"})
+
+            for tag in coverage_tag:
+                coverage.append(tag.get("content"))
+
+            # Get the distribution of the web page
+            distribution = []
+
+            distribution_tag = soup.find_all(attrs={"name": "distribution"})
+
+            for tag in distribution_tag:
+                distribution.append(tag.get("content"))
+
+            # Get the rating of the web page
+            rating = []
+
+            rating_tag = soup.find_all(attrs={"name": "rating"})
+
+            for tag in rating_tag:
+                rating.append(tag.get("content"))
+
+            # Get the subtitle of the web page
+            subtitle = []
+
+            subtitle_tag = soup.find_all(attrs={"name": "subtitle"})
+
+            for tag in subtitle_tag:
+                subtitle.append(tag.get("content"))
+
+            # Get the target of the web page
+            target = []
+
+            target_tag = soup.find_all(attrs={"name": "target"})
+
+            for tag in target_tag:
+                target.append(tag.get("content"))
+
+            # Get the date of the web page
+            date = []
+
+            date_tag = soup.find_all(attrs={"name": "date"})
+
+            for tag in date_tag:
+                date.append(tag.get("content"))
+
+            # Get the search date of the web page
+            search_date = []
+
+            search_date_tag = soup.find_all({"name": "search_date"})
+
+            for tag in search_date_tag:
+                search_date.append(tag.get("content"))
+
+            # Get the medium of the web page
+            medium = []
+
+            medium_tag = soup.find_all({"name": "medium"})
+
+            for tag in medium_tag:
+                medium.append(tag.get("content"))
+
+            # Get the syndication source of the web page
+            syndication_source = []
+
+            syndication_source_tag = soup.find_all({"name": "syndication-source"})
+
+            for tag in syndication_source_tag:
+                syndication_source.append(tag.get("content"))
+
+            # Get the original source of the web page
+            original_source = []
+
+            original_source_tag = soup.find_all({"name": "original-source"})
+
+            for tag in original_source_tag:
+                original_source.append(tag.get("content"))
+
             if number_of_results == 'multiple':
                 result = {
                     'success': True,
