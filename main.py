@@ -140,6 +140,14 @@ def get_link_details(link, number_of_results=None):
             for i in range(len(itemprop_image_tag)):
                 thumbnail_urls.append(itemprop_image_tag[i].get("content"))
 
+            # Get the author of webpage
+            author = []
+
+            author_tag = soup.find_all(attrs={"name": "author"})
+
+            for i in range(len(author_tag)):
+                author.append(author_tag[i].get("content"))
+
             if number_of_results == 'multiple':
                 result = {
                     'success': True,
@@ -147,13 +155,15 @@ def get_link_details(link, number_of_results=None):
                     'description': description,
                     'keywords': keywords,
                     'thumbnails': thumbnail_urls,
-                    'link': link
+                    'link': link,
+                    'author': author
                 }
             else:
                 title_result = ''
                 description_result = ''
                 keywords_result = ''
                 thumbnails_result = ''
+                author_result = ''
 
                 if len(title) > 0:
                     title_result = title[0]
@@ -167,13 +177,17 @@ def get_link_details(link, number_of_results=None):
                 if len(thumbnail_urls) > 0:
                     thumbnails_result = thumbnail_urls[0]
 
+                if len(author) > 0:
+                    author_result = author[0]
+
                 result = {
                     'success': True,
                     'title': title_result,
                     'description': description_result,
                     'keywords': keywords_result,
                     'thumbnail': thumbnails_result,
-                    'link': link
+                    'link': link,
+                    'author': author_result
                 }
 
         return result
