@@ -151,13 +151,41 @@ class APIHandler(webapp2.RequestHandler):
             for i in range(len(itemprop_image_tag)):
                 thumbnail_urls.append(itemprop_image_tag[i].get("content"))
 
-            result = {
-                'success': True,
-                'title': title,
-                'description': description,
-                'keywords': keywords,
-                'thumbnails': thumbnail_urls
-            }
+            number_of_results = self.request.get('results')
+
+            if number_of_results == 'multiple':
+                result = {
+                    'success': True,
+                    'title': title,
+                    'description': description,
+                    'keywords': keywords,
+                    'thumbnails': thumbnail_urls
+                }
+            else:
+                title_result = ''
+                description_result = ''
+                keywords_result = ''
+                thumbnails_result = ''
+
+                if len(title) > 0:
+                    title_result = title[0]
+
+                if len(description) > 0:
+                    description_result = description[0]
+
+                if len(keywords) > 0:
+                    keywords_result = keywords[0]
+
+                if len(thumbnail_urls) > 0:
+                    thumbnails_result = thumbnail_urls[0]
+
+                result = {
+                    'success': True,
+                    'title': title_result,
+                    'description': description_result,
+                    'keywords': keywords_result,
+                    'thumbnail': thumbnails_result
+                }
 
         self.response.write(json.dumps(result))
 
