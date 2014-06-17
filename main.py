@@ -368,6 +368,32 @@ def get_link_details(link, number_of_results=None, version=None):
 
                 if version == 'long':
                     result['keywords'] = keywords
+                    result['subject'] = subject
+                    result['copyright'] = copyright
+                    result['language'] = language
+                    result['revised'] = revised
+                    result['abstract'] = abstract
+                    result['topic'] = topic
+                    result['summary'] = summary
+                    result['classification'] = classification
+                    result['designer'] = designer
+                    result['mail'] = mail
+                    result['owner'] = owner
+                    result['url'] = url
+                    result['identifier_url'] = identifier_url
+                    result['directory'] = directory
+                    result['pagename'] = pagename
+                    result['category'] = category
+                    result['coverage'] = coverage
+                    result['distribution'] = distribution
+                    result['rating'] = rating
+                    result['subtitle'] = subtitle
+                    result['target'] = target
+                    result['date'] = date
+                    result['search_date'] = search_date
+                    result['medium'] = medium
+                    result['syndication_source'] = syndication_source
+                    result['original_source'] = original_source
 
             else:
                 title_result = ''
@@ -375,6 +401,32 @@ def get_link_details(link, number_of_results=None, version=None):
                 keywords_result = ''
                 thumbnails_result = ''
                 author_result = ''
+                subject_result = ''
+                copyright_result = ''
+                language_result = ''
+                revised_result = ''
+                abstract_result = ''
+                topic_result = ''
+                summary_result = ''
+                classification_result = ''
+                designer_result = ''
+                mail_result = ''
+                owner_result = ''
+                url_result = ''
+                identifier_url_result = ''
+                directory_result = ''
+                pagename_result = ''
+                category_result = ''
+                coverage_result = ''
+                distribution_result = ''
+                rating_result = ''
+                subtitle_result = ''
+                target_result = ''
+                date_result = ''
+                search_date_result = ''
+                medium_result = ''
+                syndication_source_result = ''
+                original_source_result = ''
 
                 if len(title) > 0:
                     title_result = title[0]
@@ -391,6 +443,84 @@ def get_link_details(link, number_of_results=None, version=None):
                 if len(author) > 0:
                     author_result = author[0]
 
+                if len(subject) > 0:
+                    subject_result = subject[0]
+
+                if len(copyright) > 0:
+                    copyright_result = copyright[0]
+
+                if len(language) > 0:
+                    language_result = language[0]
+
+                if len(revised) > 0:
+                    revised_result = revised[0]
+
+                if len(abstract) > 0:
+                    abstract_result = abstract[0]
+
+                if len(topic) > 0:
+                    topic_result = topic[0]
+
+                if len(summary) > 0:
+                    summary_result = summary[0]
+
+                if len(classification) > 0:
+                    classification_result = classification[0]
+
+                if len(designer) > 0:
+                    designer_result = designer[0]
+
+                if len(mail) > 0:
+                    mail_result = mail[0]
+
+                if len(owner) > 0:
+                    owner_result = owner[0]
+
+                if len(url) > 0:
+                    url_result = url[0]
+
+                if len(identifier_url) > 0:
+                    identifier_url_result = identifier_url[0]
+
+                if len(directory) > 0:
+                    directory_result = directory[0]
+
+                if len(pagename) > 0:
+                    pagename_result = pagename[0]
+
+                if len(category) > 0:
+                    category_result = category[0]
+
+                if len(coverage) > 0:
+                    coverage_result = coverage[0]
+
+                if len(distribution) > 0:
+                    distribution_result = distribution[0]
+
+                if len(rating) > 0:
+                    rating_result = rating[0]
+
+                if len(subtitle) > 0:
+                    subtitle_result = subtitle[0]
+
+                if len(target) > 0:
+                    target_result = target[0]
+
+                if len(date) > 0:
+                    date_result = date[0]
+
+                if len(search_date) > 0:
+                    search_date_result = search_date[0]
+
+                if len(medium) > 0:
+                    medium_result = medium[0]
+
+                if len(syndication_source) > 0:
+                    syndication_source_result = syndication_source[0]
+
+                if len(original_source) > 0:
+                    original_source_result = original_source[0]
+
                 result = {
                     'success': True,
                     'title': title_result,
@@ -402,6 +532,32 @@ def get_link_details(link, number_of_results=None, version=None):
 
                 if version == 'long':
                     result['keywords'] = keywords_result
+                    result['subject'] = subject_result
+                    result['copyright'] = copyright_result
+                    result['language'] = language_result
+                    result['revised'] = revised_result
+                    result['abstract'] = abstract_result
+                    result['topic'] = topic_result
+                    result['summary'] = summary_result
+                    result['classification'] = classification_result
+                    result['designer'] = designer_result
+                    result['mail'] = mail_result
+                    result['owner'] = owner_result
+                    result['url'] = url_result
+                    result['identifier_url'] = identifier_url_result
+                    result['directory'] = directory_result
+                    result['pagename'] = pagename_result
+                    result['category'] = category_result
+                    result['coverage'] = coverage_result
+                    result['distribution'] = distribution_result
+                    result['rating'] = rating_result
+                    result['subtitle'] = subtitle_result
+                    result['target'] = target_result
+                    result['date'] = date_result
+                    result['search_date'] = search_date_result
+                    result['medium'] = medium_result
+                    result['syndication_source'] = syndication_source_result
+                    result['original_source'] = original_source_result
 
         return result
 
