@@ -24,7 +24,7 @@ JINJA_ENVIRONMENT = jinja2.Environment(
 )
 
 
-def get_link_details(link, number_of_results):
+def get_link_details(link, number_of_results=None):
 
         url_components = urlparse.urlparse(link)
 
@@ -196,7 +196,23 @@ class APIHandler(webapp2.RequestHandler):
         self.response.write(json.dumps(result))
 
 
+class IframeSrcHandler(webapp2.RequestHandler):
+    def get(self):
+
+        link = self.request.get("link")
+
+        result = get_link_details(link)
+
+        if result['success']:
+            template = JINJA_ENVIRONMENT.get_template('iframe-src.html')
+            self.response.write(template.render(result))
+        else:
+            template = JINJA_ENVIRONMENT.get_template('iframe-error.html')
+            self.response.write(template.render())
+
+
 app = webapp2.WSGIApplication([
     ('/', IndexHandler),
-    ('/api', APIHandler)
+    ('/api', APIHandler),
+    ('/iframe-src', IframeSrcHandler)
 ], debug=True)
