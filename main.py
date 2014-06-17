@@ -24,7 +24,7 @@ JINJA_ENVIRONMENT = jinja2.Environment(
 )
 
 
-def get_link_details(link, number_of_results=None):
+def get_link_details(link, number_of_results=None, version=None):
 
         url_components = urlparse.urlparse(link)
 
@@ -153,11 +153,14 @@ def get_link_details(link, number_of_results=None):
                     'success': True,
                     'title': title,
                     'description': description,
-                    'keywords': keywords,
                     'thumbnails': thumbnail_urls,
                     'link': link,
                     'author': author
                 }
+
+                if version == 'long':
+                    result['keywords'] = keywords
+
             else:
                 title_result = ''
                 description_result = ''
@@ -184,11 +187,13 @@ def get_link_details(link, number_of_results=None):
                     'success': True,
                     'title': title_result,
                     'description': description_result,
-                    'keywords': keywords_result,
                     'thumbnail': thumbnails_result,
                     'link': link,
                     'author': author_result
                 }
+
+                if version == 'long':
+                    result['keywords'] = keywords_result
 
         return result
 
@@ -206,8 +211,9 @@ class APIHandler(webapp2.RequestHandler):
 
         link = self.request.get("link")
         number_of_results = self.request.get("results")
+        version = self.request.get("version")
 
-        result = get_link_details(link, number_of_results)
+        result = get_link_details(link, number_of_results, version)
 
         self.response.write(json.dumps(result))
 
