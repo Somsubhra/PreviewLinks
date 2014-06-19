@@ -85,14 +85,6 @@ def get_link_details(link, number_of_results=None, version=None):
             for tag in og_description_tag:
                 description.append(tag.get('content'))
 
-            # Get the keywords of the web page
-            keywords = []
-
-            keywords_tag = soup.find_all(attrs={"name": "keywords"})
-
-            for tag in keywords_tag:
-                keywords.append(tag.get('content'))
-
             # Get the title of the web page
 
             # Get the normal title tag text
@@ -151,213 +143,197 @@ def get_link_details(link, number_of_results=None, version=None):
             for tag in author_tag:
                 author.append(tag.get("content"))
 
-            # Get the subject of the web page
+            keywords = []
             subject = []
-
-            subject_tag = soup.find_all(attrs={"name": "subject"})
-
-            for tag in subject_tag:
-                subject.append(tag.get("content"))
-
-            # Get the copyright of the web page
             copyright = []
-
-            copyright_tag = soup.find_all(attrs={"name": "copyright"})
-
-            for tag in copyright_tag:
-                copyright.append(tag.get("content"))
-
-            # Get the language of the web page
             language = []
-
-            language_tag = soup.find_all(attrs={"name": "language"})
-
-            for tag in language_tag:
-                language.append(tag.get("content"))
-
-            # Get the revised time of the web page
             revised = []
-
-            revised_tag = soup.find_all(attrs={"name": "revised"})
-
-            for tag in revised_tag:
-                revised.append(tag.get("content"))
-
-            # Get the abstract of the web page
             abstract = []
-
-            abstract_tag = soup.find_all(attrs={"name": "abstract"})
-
-            for tag in abstract_tag:
-                abstract.append(tag.get("content"))
-
-            # Get the topic of the web page
             topic = []
-
-            topic_tag = soup.find_all(attrs={"name": "topic"})
-
-            for tag in topic_tag:
-                topic.append(tag.get("content"))
-
-            # Get the summary of the web page
             summary = []
-
-            summary_tag = soup.find_all(attrs={"name": "summary"})
-
-            for tag in summary_tag:
-                summary.append(tag.get("content"))
-
-            # Get the classification of the web page
             classification = []
-
-            classification_tag = soup.find_all(attrs={"name": "classification"})
-
-            for tag in classification_tag:
-                classification.append(tag.get("content"))
-
-            # Get the designer of the web page
             designer = []
-
-            designer_tag = soup.find_all(attrs={"name": "designer"})
-
-            for tag in designer_tag:
-                designer.append(tag.get("content"))
-
-            # Get the mail id of the web page
             mail = []
-
-            mail_tag = soup.find_all(attrs={"name": "reply-to"})
-
-            for tag in mail_tag:
-                mail.append(tag.get("content"))
-
-            # Get the owner of the web page
             owner = []
-
-            owner_tag = soup.find_all(attrs={"name": "owner"})
-
-            for tag in owner_tag:
-                owner.append(tag.get("content"))
-
-            # Get the url of the web page
             url = []
-
-            url_tag = soup.find_all(attrs={"name": "url"})
-
-            for tag in url_tag:
-                url.append(tag.get("content"))
-
-            # Get the identifier url of the web page
             identifier_url = []
-
-            identifier_url_tag = soup.find_all(attrs={"name": "identifier-url"})
-
-            for tag in identifier_url_tag:
-                identifier_url.append(tag)
-
-            # Get the directory of the web page
             directory = []
-
-            directory_tag = soup.find_all(attrs={"name": "directory"})
-
-            for tag in directory_tag:
-                directory.append(tag.get("content"))
-
-            # Get the page name
             pagename = []
-
-            pagename_tag = soup.find_all(attrs={"name": "pagename"})
-
-            for tag in pagename_tag:
-                pagename.append(tag.get("content"))
-
-            # Get the category of the web page
             category = []
-
-            category_tag = soup.find_all(attrs={"name": "category"})
-
-            for tag in category_tag:
-                category.append(tag.get("content"))
-
-            # Get the coverage of the web page
             coverage = []
-
-            coverage_tag = soup.find_all(attrs={"name": "coverage"})
-
-            for tag in coverage_tag:
-                coverage.append(tag.get("content"))
-
-            # Get the distribution of the web page
             distribution = []
-
-            distribution_tag = soup.find_all(attrs={"name": "distribution"})
-
-            for tag in distribution_tag:
-                distribution.append(tag.get("content"))
-
-            # Get the rating of the web page
             rating = []
-
-            rating_tag = soup.find_all(attrs={"name": "rating"})
-
-            for tag in rating_tag:
-                rating.append(tag.get("content"))
-
-            # Get the subtitle of the web page
             subtitle = []
-
-            subtitle_tag = soup.find_all(attrs={"name": "subtitle"})
-
-            for tag in subtitle_tag:
-                subtitle.append(tag.get("content"))
-
-            # Get the target of the web page
             target = []
-
-            target_tag = soup.find_all(attrs={"name": "target"})
-
-            for tag in target_tag:
-                target.append(tag.get("content"))
-
-            # Get the date of the web page
             date = []
-
-            date_tag = soup.find_all(attrs={"name": "date"})
-
-            for tag in date_tag:
-                date.append(tag.get("content"))
-
-            # Get the search date of the web page
             search_date = []
-
-            search_date_tag = soup.find_all({"name": "search_date"})
-
-            for tag in search_date_tag:
-                search_date.append(tag.get("content"))
-
-            # Get the medium of the web page
             medium = []
-
-            medium_tag = soup.find_all({"name": "medium"})
-
-            for tag in medium_tag:
-                medium.append(tag.get("content"))
-
-            # Get the syndication source of the web page
             syndication_source = []
-
-            syndication_source_tag = soup.find_all({"name": "syndication-source"})
-
-            for tag in syndication_source_tag:
-                syndication_source.append(tag.get("content"))
-
-            # Get the original source of the web page
             original_source = []
 
-            original_source_tag = soup.find_all({"name": "original-source"})
+            if version == 'long':
 
-            for tag in original_source_tag:
-                original_source.append(tag.get("content"))
+                # Get the keywords of the web page
+                keywords_tag = soup.find_all(attrs={"name": "keywords"})
+
+                for tag in keywords_tag:
+                    keywords.append(tag.get('content'))
+
+                # Get the subject of the web page
+                subject_tag = soup.find_all(attrs={"name": "subject"})
+
+                for tag in subject_tag:
+                    subject.append(tag.get("content"))
+
+                # Get the copyright of the web page
+                copyright_tag = soup.find_all(attrs={"name": "copyright"})
+
+                for tag in copyright_tag:
+                    copyright.append(tag.get("content"))
+
+                # Get the language of the web page
+                language_tag = soup.find_all(attrs={"name": "language"})
+
+                for tag in language_tag:
+                    language.append(tag.get("content"))
+
+                # Get the revised time of the web page
+                revised_tag = soup.find_all(attrs={"name": "revised"})
+
+                for tag in revised_tag:
+                    revised.append(tag.get("content"))
+
+                # Get the abstract of the web page
+                abstract_tag = soup.find_all(attrs={"name": "abstract"})
+
+                for tag in abstract_tag:
+                    abstract.append(tag.get("content"))
+
+                # Get the topic of the web page
+                topic_tag = soup.find_all(attrs={"name": "topic"})
+
+                for tag in topic_tag:
+                    topic.append(tag.get("content"))
+
+                # Get the summary of the web page
+                summary_tag = soup.find_all(attrs={"name": "summary"})
+
+                for tag in summary_tag:
+                    summary.append(tag.get("content"))
+
+                # Get the classification of the web page
+                classification_tag = soup.find_all(attrs={"name": "classification"})
+
+                for tag in classification_tag:
+                    classification.append(tag.get("content"))
+
+                # Get the designer of the web page
+                designer_tag = soup.find_all(attrs={"name": "designer"})
+
+                for tag in designer_tag:
+                    designer.append(tag.get("content"))
+
+                # Get the mail id of the web page
+                mail_tag = soup.find_all(attrs={"name": "reply-to"})
+
+                for tag in mail_tag:
+                    mail.append(tag.get("content"))
+
+                # Get the owner of the web page
+                owner_tag = soup.find_all(attrs={"name": "owner"})
+
+                for tag in owner_tag:
+                    owner.append(tag.get("content"))
+
+                # Get the url of the web page
+                url_tag = soup.find_all(attrs={"name": "url"})
+
+                for tag in url_tag:
+                    url.append(tag.get("content"))
+
+                # Get the identifier url of the web page
+                identifier_url_tag = soup.find_all(attrs={"name": "identifier-url"})
+
+                for tag in identifier_url_tag:
+                    identifier_url.append(tag)
+
+                # Get the directory of the web page
+                directory_tag = soup.find_all(attrs={"name": "directory"})
+
+                for tag in directory_tag:
+                    directory.append(tag.get("content"))
+
+                # Get the page name
+                pagename_tag = soup.find_all(attrs={"name": "pagename"})
+
+                for tag in pagename_tag:
+                    pagename.append(tag.get("content"))
+
+                # Get the category of the web page
+                category_tag = soup.find_all(attrs={"name": "category"})
+
+                for tag in category_tag:
+                    category.append(tag.get("content"))
+
+                # Get the coverage of the web page
+                coverage_tag = soup.find_all(attrs={"name": "coverage"})
+
+                for tag in coverage_tag:
+                    coverage.append(tag.get("content"))
+
+                # Get the distribution of the web page
+                distribution_tag = soup.find_all(attrs={"name": "distribution"})
+
+                for tag in distribution_tag:
+                    distribution.append(tag.get("content"))
+
+                # Get the rating of the web page
+                rating_tag = soup.find_all(attrs={"name": "rating"})
+
+                for tag in rating_tag:
+                    rating.append(tag.get("content"))
+
+                # Get the subtitle of the web page
+                subtitle_tag = soup.find_all(attrs={"name": "subtitle"})
+
+                for tag in subtitle_tag:
+                    subtitle.append(tag.get("content"))
+
+                # Get the target of the web page
+                target_tag = soup.find_all(attrs={"name": "target"})
+
+                for tag in target_tag:
+                    target.append(tag.get("content"))
+
+                # Get the date of the web page
+                date_tag = soup.find_all(attrs={"name": "date"})
+
+                for tag in date_tag:
+                    date.append(tag.get("content"))
+
+                # Get the search date of the web page
+                search_date_tag = soup.find_all({"name": "search_date"})
+
+                for tag in search_date_tag:
+                    search_date.append(tag.get("content"))
+
+                # Get the medium of the web page
+                medium_tag = soup.find_all({"name": "medium"})
+
+                for tag in medium_tag:
+                    medium.append(tag.get("content"))
+
+                # Get the syndication source of the web page
+                syndication_source_tag = soup.find_all({"name": "syndication-source"})
+
+                for tag in syndication_source_tag:
+                    syndication_source.append(tag.get("content"))
+
+                # Get the original source of the web page
+                original_source_tag = soup.find_all({"name": "original-source"})
+
+                for tag in original_source_tag:
+                    original_source.append(tag.get("content"))
 
             if number_of_results == 'multiple':
                 result = {
@@ -437,92 +413,11 @@ def get_link_details(link, number_of_results=None, version=None):
                 if len(description) > 0:
                     description_result = description[0]
 
-                if len(keywords) > 0:
-                    keywords_result = keywords[0]
-
                 if len(thumbnail_urls) > 0:
                     thumbnails_result = thumbnail_urls[0]
 
                 if len(author) > 0:
                     author_result = author[0]
-
-                if len(subject) > 0:
-                    subject_result = subject[0]
-
-                if len(copyright) > 0:
-                    copyright_result = copyright[0]
-
-                if len(language) > 0:
-                    language_result = language[0]
-
-                if len(revised) > 0:
-                    revised_result = revised[0]
-
-                if len(abstract) > 0:
-                    abstract_result = abstract[0]
-
-                if len(topic) > 0:
-                    topic_result = topic[0]
-
-                if len(summary) > 0:
-                    summary_result = summary[0]
-
-                if len(classification) > 0:
-                    classification_result = classification[0]
-
-                if len(designer) > 0:
-                    designer_result = designer[0]
-
-                if len(mail) > 0:
-                    mail_result = mail[0]
-
-                if len(owner) > 0:
-                    owner_result = owner[0]
-
-                if len(url) > 0:
-                    url_result = url[0]
-
-                if len(identifier_url) > 0:
-                    identifier_url_result = identifier_url[0]
-
-                if len(directory) > 0:
-                    directory_result = directory[0]
-
-                if len(pagename) > 0:
-                    pagename_result = pagename[0]
-
-                if len(category) > 0:
-                    category_result = category[0]
-
-                if len(coverage) > 0:
-                    coverage_result = coverage[0]
-
-                if len(distribution) > 0:
-                    distribution_result = distribution[0]
-
-                if len(rating) > 0:
-                    rating_result = rating[0]
-
-                if len(subtitle) > 0:
-                    subtitle_result = subtitle[0]
-
-                if len(target) > 0:
-                    target_result = target[0]
-
-                if len(date) > 0:
-                    date_result = date[0]
-
-                if len(search_date) > 0:
-                    search_date_result = search_date[0]
-
-                if len(medium) > 0:
-                    medium_result = medium[0]
-
-                if len(syndication_source) > 0:
-                    syndication_source_result = syndication_source[0]
-
-                if len(original_source) > 0:
-                    original_source_result = original_source[0]
 
                 result = {
                     'success': True,
@@ -534,6 +429,88 @@ def get_link_details(link, number_of_results=None, version=None):
                 }
 
                 if version == 'long':
+
+                    if len(keywords) > 0:
+                        keywords_result = keywords[0]
+
+                    if len(subject) > 0:
+                        subject_result = subject[0]
+
+                    if len(copyright) > 0:
+                        copyright_result = copyright[0]
+
+                    if len(language) > 0:
+                        language_result = language[0]
+
+                    if len(revised) > 0:
+                        revised_result = revised[0]
+
+                    if len(abstract) > 0:
+                        abstract_result = abstract[0]
+
+                    if len(topic) > 0:
+                        topic_result = topic[0]
+
+                    if len(summary) > 0:
+                        summary_result = summary[0]
+
+                    if len(classification) > 0:
+                        classification_result = classification[0]
+
+                    if len(designer) > 0:
+                        designer_result = designer[0]
+
+                    if len(mail) > 0:
+                        mail_result = mail[0]
+
+                    if len(owner) > 0:
+                        owner_result = owner[0]
+
+                    if len(url) > 0:
+                        url_result = url[0]
+
+                    if len(identifier_url) > 0:
+                        identifier_url_result = identifier_url[0]
+
+                    if len(directory) > 0:
+                        directory_result = directory[0]
+
+                    if len(pagename) > 0:
+                        pagename_result = pagename[0]
+
+                    if len(category) > 0:
+                        category_result = category[0]
+
+                    if len(coverage) > 0:
+                        coverage_result = coverage[0]
+
+                    if len(distribution) > 0:
+                        distribution_result = distribution[0]
+
+                    if len(rating) > 0:
+                        rating_result = rating[0]
+
+                    if len(subtitle) > 0:
+                        subtitle_result = subtitle[0]
+
+                    if len(target) > 0:
+                        target_result = target[0]
+
+                    if len(date) > 0:
+                        date_result = date[0]
+
+                    if len(search_date) > 0:
+                        search_date_result = search_date[0]
+
+                    if len(medium) > 0:
+                        medium_result = medium[0]
+
+                    if len(syndication_source) > 0:
+                        syndication_source_result = syndication_source[0]
+
+                    if len(original_source) > 0:
+                        original_source_result = original_source[0]
+
                     result['keywords'] = keywords_result
                     result['subject'] = subject_result
                     result['copyright'] = copyright_result
