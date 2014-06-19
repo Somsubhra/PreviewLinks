@@ -9,7 +9,7 @@ import sys
 sys.path.insert(0, 'third-party')
 
 # import third party libraries
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, SoupStrainer
 
 # import frameworks
 import webapp2
@@ -62,25 +62,35 @@ def get_link_details(link, number_of_results=None, version=None):
         else:
             html = response.read()
 
-            soup = BeautifulSoup(html.decode('utf-8'))
+            # The meta tags soup
+            meta_strainer = SoupStrainer('meta')
+            meta_soup = BeautifulSoup(html.decode('utf-8'), parse_only=meta_strainer)
+
+            # The link tags soup
+            link_strainer = SoupStrainer('link')
+            link_soup = BeautifulSoup(html.decode('utf-8'), parse_only=link_strainer)
+
+            # The title soup
+            title_strainer = SoupStrainer('title')
+            title_soup = BeautifulSoup(html.decode('utf-8'), parse_only=title_strainer)
 
             # Get the description of the web page
 
             # Description from meta tag
             description = []
 
-            description_tag = soup.find_all(attrs={"name": "description"})
+            description_tag = meta_soup.find_all(attrs={"name": "description"})
 
             for tag in description_tag:
                 description.append(tag.get('content'))
 
             # Description from open graph tag
-            og_description_tag = soup.find_all(attrs={"name": "og:description"})
+            og_description_tag = meta_soup.find_all(attrs={"name": "og:description"})
 
             for tag in og_description_tag:
                 description.append(tag.get('content'))
 
-            og_description_tag = soup.find_all(attrs={"property": "og:description"})
+            og_description_tag = meta_soup.find_all(attrs={"property": "og:description"})
 
             for tag in og_description_tag:
                 description.append(tag.get('content'))
@@ -90,16 +100,16 @@ def get_link_details(link, number_of_results=None, version=None):
             # Get the normal title tag text
             title = []
 
-            if soup.title:
-                title.append(soup.title.string)
+            if title_soup.title:
+                title.append(title_soup.title.string)
 
             # Get the open graph title
-            title_tag = soup.find_all(attrs={"name": "og:title"})
+            title_tag = meta_soup.find_all(attrs={"name": "og:title"})
 
             for tag in title_tag:
                 title.append(tag.get('content'))
 
-            title_tag = soup.find_all(attrs={"property": "og:title"})
+            title_tag = meta_soup.find_all(attrs={"property": "og:title"})
 
             for tag in title_tag:
                 title.append(tag.get('content'))
@@ -108,29 +118,29 @@ def get_link_details(link, number_of_results=None, version=None):
             thumbnail_urls = []
 
             # Search for any open graph image
-            og_image_tag = soup.find_all(attrs={"property": "og:image"})
+            og_image_tag = meta_soup.find_all(attrs={"property": "og:image"})
 
             for tag in og_image_tag:
                 thumbnail_urls.append(tag.get("content"))
 
-            og_image_tag = soup.find_all(attrs={"name": "og:image"})
+            og_image_tag = meta_soup.find_all(attrs={"name": "og:image"})
 
             for tag in og_image_tag:
                 thumbnail_urls.append(tag.get("content"))
 
             # Search for link rel=img_src or image_src
-            link_image_tag = soup.find_all(attrs={"rel": "img_src"})
+            link_image_tag = link_soup.find_all(attrs={"rel": "img_src"})
 
             for tag in link_image_tag:
                 thumbnail_urls.append(tag.get("href"))
 
-            link_image_tag = soup.find_all(attrs={"rel": "image_src"})
+            link_image_tag = link_soup.find_all(attrs={"rel": "image_src"})
 
             for tag in link_image_tag:
                 thumbnail_urls.append(tag.get("href"))
 
             # Search for itemprop=image
-            itemprop_image_tag = soup.find_all(attrs={"itemprop": "image"})
+            itemprop_image_tag = meta_soup.find_all(attrs={"itemprop": "image"})
 
             for tag in itemprop_image_tag:
                 thumbnail_urls.append(tag.get("content"))
@@ -138,7 +148,7 @@ def get_link_details(link, number_of_results=None, version=None):
             # Get the author of webpage
             author = []
 
-            author_tag = soup.find_all(attrs={"name": "author"})
+            author_tag = meta_soup.find_all(attrs={"name": "author"})
 
             for tag in author_tag:
                 author.append(tag.get("content"))
@@ -174,163 +184,163 @@ def get_link_details(link, number_of_results=None, version=None):
             if version == 'long':
 
                 # Get the keywords of the web page
-                keywords_tag = soup.find_all(attrs={"name": "keywords"})
+                keywords_tag = meta_soup.find_all(attrs={"name": "keywords"})
 
                 for tag in keywords_tag:
                     keywords.append(tag.get('content'))
 
                 # Get the subject of the web page
-                subject_tag = soup.find_all(attrs={"name": "subject"})
+                subject_tag = meta_soup.find_all(attrs={"name": "subject"})
 
                 for tag in subject_tag:
                     subject.append(tag.get("content"))
 
                 # Get the copyright of the web page
-                copyright_tag = soup.find_all(attrs={"name": "copyright"})
+                copyright_tag = meta_soup.find_all(attrs={"name": "copyright"})
 
                 for tag in copyright_tag:
                     copyright.append(tag.get("content"))
 
                 # Get the language of the web page
-                language_tag = soup.find_all(attrs={"name": "language"})
+                language_tag = meta_soup.find_all(attrs={"name": "language"})
 
                 for tag in language_tag:
                     language.append(tag.get("content"))
 
                 # Get the revised time of the web page
-                revised_tag = soup.find_all(attrs={"name": "revised"})
+                revised_tag = meta_soup.find_all(attrs={"name": "revised"})
 
                 for tag in revised_tag:
                     revised.append(tag.get("content"))
 
                 # Get the abstract of the web page
-                abstract_tag = soup.find_all(attrs={"name": "abstract"})
+                abstract_tag = meta_soup.find_all(attrs={"name": "abstract"})
 
                 for tag in abstract_tag:
                     abstract.append(tag.get("content"))
 
                 # Get the topic of the web page
-                topic_tag = soup.find_all(attrs={"name": "topic"})
+                topic_tag = meta_soup.find_all(attrs={"name": "topic"})
 
                 for tag in topic_tag:
                     topic.append(tag.get("content"))
 
                 # Get the summary of the web page
-                summary_tag = soup.find_all(attrs={"name": "summary"})
+                summary_tag = meta_soup.find_all(attrs={"name": "summary"})
 
                 for tag in summary_tag:
                     summary.append(tag.get("content"))
 
                 # Get the classification of the web page
-                classification_tag = soup.find_all(attrs={"name": "classification"})
+                classification_tag = meta_soup.find_all(attrs={"name": "classification"})
 
                 for tag in classification_tag:
                     classification.append(tag.get("content"))
 
                 # Get the designer of the web page
-                designer_tag = soup.find_all(attrs={"name": "designer"})
+                designer_tag = meta_soup.find_all(attrs={"name": "designer"})
 
                 for tag in designer_tag:
                     designer.append(tag.get("content"))
 
                 # Get the mail id of the web page
-                mail_tag = soup.find_all(attrs={"name": "reply-to"})
+                mail_tag = meta_soup.find_all(attrs={"name": "reply-to"})
 
                 for tag in mail_tag:
                     mail.append(tag.get("content"))
 
                 # Get the owner of the web page
-                owner_tag = soup.find_all(attrs={"name": "owner"})
+                owner_tag = meta_soup.find_all(attrs={"name": "owner"})
 
                 for tag in owner_tag:
                     owner.append(tag.get("content"))
 
                 # Get the url of the web page
-                url_tag = soup.find_all(attrs={"name": "url"})
+                url_tag = meta_soup.find_all(attrs={"name": "url"})
 
                 for tag in url_tag:
                     url.append(tag.get("content"))
 
                 # Get the identifier url of the web page
-                identifier_url_tag = soup.find_all(attrs={"name": "identifier-url"})
+                identifier_url_tag = meta_soup.find_all(attrs={"name": "identifier-url"})
 
                 for tag in identifier_url_tag:
                     identifier_url.append(tag)
 
                 # Get the directory of the web page
-                directory_tag = soup.find_all(attrs={"name": "directory"})
+                directory_tag = meta_soup.find_all(attrs={"name": "directory"})
 
                 for tag in directory_tag:
                     directory.append(tag.get("content"))
 
                 # Get the page name
-                pagename_tag = soup.find_all(attrs={"name": "pagename"})
+                pagename_tag = meta_soup.find_all(attrs={"name": "pagename"})
 
                 for tag in pagename_tag:
                     pagename.append(tag.get("content"))
 
                 # Get the category of the web page
-                category_tag = soup.find_all(attrs={"name": "category"})
+                category_tag = meta_soup.find_all(attrs={"name": "category"})
 
                 for tag in category_tag:
                     category.append(tag.get("content"))
 
                 # Get the coverage of the web page
-                coverage_tag = soup.find_all(attrs={"name": "coverage"})
+                coverage_tag = meta_soup.find_all(attrs={"name": "coverage"})
 
                 for tag in coverage_tag:
                     coverage.append(tag.get("content"))
 
                 # Get the distribution of the web page
-                distribution_tag = soup.find_all(attrs={"name": "distribution"})
+                distribution_tag = meta_soup.find_all(attrs={"name": "distribution"})
 
                 for tag in distribution_tag:
                     distribution.append(tag.get("content"))
 
                 # Get the rating of the web page
-                rating_tag = soup.find_all(attrs={"name": "rating"})
+                rating_tag = meta_soup.find_all(attrs={"name": "rating"})
 
                 for tag in rating_tag:
                     rating.append(tag.get("content"))
 
                 # Get the subtitle of the web page
-                subtitle_tag = soup.find_all(attrs={"name": "subtitle"})
+                subtitle_tag = meta_soup.find_all(attrs={"name": "subtitle"})
 
                 for tag in subtitle_tag:
                     subtitle.append(tag.get("content"))
 
                 # Get the target of the web page
-                target_tag = soup.find_all(attrs={"name": "target"})
+                target_tag = meta_soup.find_all(attrs={"name": "target"})
 
                 for tag in target_tag:
                     target.append(tag.get("content"))
 
                 # Get the date of the web page
-                date_tag = soup.find_all(attrs={"name": "date"})
+                date_tag = meta_soup.find_all(attrs={"name": "date"})
 
                 for tag in date_tag:
                     date.append(tag.get("content"))
 
                 # Get the search date of the web page
-                search_date_tag = soup.find_all({"name": "search_date"})
+                search_date_tag = meta_soup.find_all({"name": "search_date"})
 
                 for tag in search_date_tag:
                     search_date.append(tag.get("content"))
 
                 # Get the medium of the web page
-                medium_tag = soup.find_all({"name": "medium"})
+                medium_tag = meta_soup.find_all({"name": "medium"})
 
                 for tag in medium_tag:
                     medium.append(tag.get("content"))
 
                 # Get the syndication source of the web page
-                syndication_source_tag = soup.find_all({"name": "syndication-source"})
+                syndication_source_tag = meta_soup.find_all({"name": "syndication-source"})
 
                 for tag in syndication_source_tag:
                     syndication_source.append(tag.get("content"))
 
                 # Get the original source of the web page
-                original_source_tag = soup.find_all({"name": "original-source"})
+                original_source_tag = meta_soup.find_all({"name": "original-source"})
 
                 for tag in original_source_tag:
                     original_source.append(tag.get("content"))
