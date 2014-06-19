@@ -155,7 +155,7 @@ def get_link_details(link, number_of_results=None, version=None):
 
             keywords = []
             subject = []
-            copyright = []
+            copy_right = []
             language = []
             revised = []
             abstract = []
@@ -196,10 +196,10 @@ def get_link_details(link, number_of_results=None, version=None):
                     subject.append(tag.get("content"))
 
                 # Get the copyright of the web page
-                copyright_tag = meta_soup.find_all(attrs={"name": "copyright"})
+                copy_right_tag = meta_soup.find_all(attrs={"name": "copyright"})
 
-                for tag in copyright_tag:
-                    copyright.append(tag.get("content"))
+                for tag in copy_right_tag:
+                    copy_right.append(tag.get("content"))
 
                 # Get the language of the web page
                 language_tag = meta_soup.find_all(attrs={"name": "language"})
@@ -358,7 +358,7 @@ def get_link_details(link, number_of_results=None, version=None):
                 if version == 'long':
                     result['keywords'] = keywords
                     result['subject'] = subject
-                    result['copyright'] = copyright
+                    result['copyright'] = copy_right
                     result['language'] = language
                     result['revised'] = revised
                     result['abstract'] = abstract
@@ -414,7 +414,7 @@ def get_link_details(link, number_of_results=None, version=None):
                 if version == 'long':
 
                     subject_result = ''
-                    copyright_result = ''
+                    copy_right_result = ''
                     language_result = ''
                     revised_result = ''
                     abstract_result = ''
@@ -447,8 +447,8 @@ def get_link_details(link, number_of_results=None, version=None):
                     if len(subject) > 0:
                         subject_result = subject[0]
 
-                    if len(copyright) > 0:
-                        copyright_result = copyright[0]
+                    if len(copy_right) > 0:
+                        copy_right_result = copy_right[0]
 
                     if len(language) > 0:
                         language_result = language[0]
@@ -524,7 +524,7 @@ def get_link_details(link, number_of_results=None, version=None):
 
                     result['keywords'] = keywords_result
                     result['subject'] = subject_result
-                    result['copyright'] = copyright_result
+                    result['copyright'] = copy_right_result
                     result['language'] = language_result
                     result['revised'] = revised_result
                     result['abstract'] = abstract_result
