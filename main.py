@@ -63,7 +63,7 @@ def get_link_details(link, number_of_results=None, version=None):
             html = response.read()
 
             # The strainer
-            required_tags = ["meta", "link", "title"]
+            required_tags = ["meta", "link", "title", "img"]
             strainer = SoupStrainer(name=required_tags)
 
             # Make the soup
