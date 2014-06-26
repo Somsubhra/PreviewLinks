@@ -140,6 +140,12 @@ def get_link_details(link, number_of_results=None, version=None):
             for tag in itemprop_image_tag:
                 thumbnail_urls.append(urlparse.urljoin(link, tag.get("content")))
 
+            # Get all the images in the webpage
+            image_tag = soup.find_all("img")
+
+            for tag in image_tag:
+                thumbnail_urls.append(urlparse.urljoin(link, tag.get("src")))
+
             # Get the author of webpage
             author = []
 
