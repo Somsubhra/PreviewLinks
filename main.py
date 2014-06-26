@@ -116,29 +116,29 @@ def get_link_details(link, number_of_results=None, version=None):
             og_image_tag = soup.find_all(attrs={"property": "og:image"})
 
             for tag in og_image_tag:
-                thumbnail_urls.append(tag.get("content"))
+                thumbnail_urls.append(urlparse.urljoin(link, tag.get("content")))
 
             og_image_tag = soup.find_all(attrs={"name": "og:image"})
 
             for tag in og_image_tag:
-                thumbnail_urls.append(tag.get("content"))
+                thumbnail_urls.append(urlparse.urljoin(link, tag.get("content")))
 
             # Search for link rel=img_src or image_src
             link_image_tag = soup.find_all(attrs={"rel": "img_src"})
 
             for tag in link_image_tag:
-                thumbnail_urls.append(tag.get("href"))
+                thumbnail_urls.append(urlparse.urljoin(link, tag.get("href")))
 
             link_image_tag = soup.find_all(attrs={"rel": "image_src"})
 
             for tag in link_image_tag:
-                thumbnail_urls.append(tag.get("href"))
+                thumbnail_urls.append(urlparse.urljoin(link, tag.get("href")))
 
             # Search for itemprop=image
             itemprop_image_tag = soup.find_all(attrs={"itemprop": "image"})
 
             for tag in itemprop_image_tag:
-                thumbnail_urls.append(tag.get("content"))
+                thumbnail_urls.append(urlparse.urljoin(link, tag.get("content")))
 
             # Get the author of webpage
             author = []
