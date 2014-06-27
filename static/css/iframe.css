@@ -1,0 +1,62 @@
+.link-preview {
+    width: 500px;
+    border: 1px solid rgba(189, 195, 199, 0.4);
+    border-radius: 5px;
+    background-color: rgba(189, 195, 199, 0.2);
+    height: 118px;
+}
+
+.link-thumbnail {
+    position: absolute;
+    width: 96px;
+    height: 96px;
+    top: 19px;
+    left: 19px;
+    border: 1px solid rgba(189, 195, 199, 0.4);
+}
+
+.link-content {
+    position: absolute;
+    left: 117px;
+    top: 19px;
+    border: 1px solid rgba(189, 195, 199, 0.4);
+    width: 380px;
+    height: 96px
+}
+
+.link-title {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    font-family: sans-serif;
+    font-size: 18px;
+    text-decoration: none;
+    color: rgba(52, 152, 219, 1.0);
+}
+
+.link-desc {
+    position: absolute;
+    top: 30px;
+    left: 5px;
+    font-family: sans-serif;
+    font-size: 12px;
+    color: rgba(127, 140, 141, 1.0);
+}
+
+.link-link {
+    position: absolute;
+    bottom: 8px;
+    left: 5px;
+    font-family: sans-serif;
+    font-size: 12px;
+    color: rgba(189, 195, 199, 1.0);
+}
+
+.link-author {
+    position: absolute;
+    bottom: 8px;
+    right: 10px;
+    font-family: sans-serif;
+    font-size: 12px;
+    color: rgba(189, 195, 199, 1.0);
+}

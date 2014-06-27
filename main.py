@@ -24,6 +24,17 @@ JINJA_ENVIRONMENT = jinja2.Environment(
 )
 
 
+# Limit the string
+def limit_string(string, limit):
+    result = string[0:limit]
+
+    if limit < len(string):
+        result += "..."
+
+    return result
+
+
+# Function to fetch all the link details
 def get_link_details(link, number_of_results=None, version=None):
 
         url_components = urlparse.urlparse(link)
@@ -582,8 +593,16 @@ class IframeSrcHandler(webapp2.RequestHandler):
         result = get_link_details(link)
 
         if result['success']:
+            variables = {
+                "thumbnail": result["thumbnail"],
+                "author": limit_string(result["author"], 20),
+                "description": limit_string(result["description"], 120),
+                "title": limit_string(result["title"], 30),
+                "link_text": limit_string(result["link"], 30),
+                "link": result["link"]
+            }
             template = JINJA_ENVIRONMENT.get_template('iframe-src.html')
-            self.response.write(template.render(result))
+            self.response.write(template.render(variables))
         else:
             template = JINJA_ENVIRONMENT.get_template('iframe-error.html')
             self.response.write(template.render())
