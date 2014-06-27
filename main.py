@@ -592,10 +592,20 @@ class IframeSrcHandler(webapp2.RequestHandler):
 
         result = get_link_details(link)
 
+        thumbnail = result["thumbnail"]
+
+        if thumbnail == "":
+            thumbnail = "/static/img/default-thumbnail.png"
+
+        author = result["author"]
+
+        if author != "":
+            author = "By " + author
+
         if result['success']:
             variables = {
-                "thumbnail": result["thumbnail"],
-                "author": limit_string(result["author"], 20),
+                "thumbnail": thumbnail,
+                "author": limit_string(author, 25),
                 "description": limit_string(result["description"], 120),
                 "title": limit_string(result["title"], 30),
                 "link_text": limit_string(result["link"], 30),

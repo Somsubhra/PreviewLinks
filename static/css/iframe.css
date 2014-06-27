@@ -27,7 +27,7 @@
 .link-title {
     position: absolute;
     top: 5px;
-    left: 5px;
+    left: 10px;
     font-family: sans-serif;
     font-size: 18px;
     text-decoration: none;
@@ -37,7 +37,7 @@
 .link-desc {
     position: absolute;
     top: 30px;
-    left: 5px;
+    left: 10px;
     font-family: sans-serif;
     font-size: 12px;
     color: rgba(127, 140, 141, 1.0);
@@ -46,7 +46,7 @@
 .link-link {
     position: absolute;
     bottom: 8px;
-    left: 5px;
+    left: 10px;
     font-family: sans-serif;
     font-size: 12px;
     color: rgba(189, 195, 199, 1.0);

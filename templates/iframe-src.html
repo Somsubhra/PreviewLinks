@@ -12,11 +12,7 @@
             <div class="link-title">{{ title }}</div>
             <div class="link-desc">{{ description }}</div>
             <div class="link-link">{{ link_text }}</div>
-            <div class="link-author">
-                {% if author != '' %}
-                By {{ author }}
-                {% endif %}
-            </div>
+            <div class="link-author">{{ author }}</div>
         </div>
     </div>
 </a>
